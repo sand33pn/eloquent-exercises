@@ -4,20 +4,8 @@ function average(array) {
 }
 
 // Your code here.
-function groupBy(array, groupOf){
-  var groups = {};
-  array.forEach(function(element){
-    var groupName = groupOf(element)
-    if(groupName in groups)
-      groups[groupName].push(element);
-    else
-      groups[groupName] = [element];
-  });
-  return groups;
-}
-
-var byCentury = groupBy(ancestry, function(element){
-  return Math.ceil(element.died / 100);
+var byCentury = groupBy(ancestry, function(person) {
+  return Math.ceil(person.died / 100);
 });
 
 for(var century in byCentury){
@@ -27,6 +15,17 @@ for(var century in byCentury){
   console.log(century + ": " + average(ages));
 }
 
+function groupBy(array, grouping){
+  var groups = [];
+  array.forEach(function(element){
+    var groupName = grouping(element);
+    if(groupName in groups)
+      groups[groupName].push(element);
+    else
+      groups[groupName] = [element];
+  });
+  return groups;
+}
 // → 16: 43.5
 //   17: 51.2
 //   18: 52.8

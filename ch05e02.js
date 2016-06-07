@@ -8,11 +8,13 @@ ancestry.forEach(function(person) {
   byName[person.name] = person;
 });
 
-// Your code here.
-var diff = ancestry.filter(function(person){
-  return byName[person.mother] != null;
-}).map(function(person){
-  return person.born - byName[person.mother].born;
+var diff = ancestry.map(function(person){
+  if(byName[person.mother])
+    return person.born - byName[person.mother].born;
+  return null;
+}).filter(function(diff){
+  return diff != null;
 });
 
 console.log(average(diff));
+// → 31.2
