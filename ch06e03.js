@@ -1,10 +1,9 @@
 function logFive(sequence){
   for(var i = 0; i < 5; i++){
-    if(!sequence.next())
-      break;
+    if(!sequence.next()) break;
     console.log(sequence.current());
   }
-};
+}
 
 function ArraySeq(array){
   this.pos = -1;
@@ -12,8 +11,7 @@ function ArraySeq(array){
 }
 
 ArraySeq.prototype.next = function(){
-  if(this.pos >= this.array.length - 1)
-    return false;
+  if(this.pos >= this.array.length - 1) return false;
   this.pos++;
   return true;
 };
@@ -28,8 +26,7 @@ function RangeSeq(from, to){
 }
 
 RangeSeq.prototype.next = function(){
-  if(this.pos >= this.to)
-    return false;
+  if(this.pos > this.to - 1) return false;
   this.pos++;
   return true;
 };
@@ -41,7 +38,7 @@ RangeSeq.prototype.current = function(){
 logFive(new ArraySeq([1, 2]));
 // → 1
 // → 2
-logFive(new RangeSeq(100, 102));
+logFive(new RangeSeq(100, 1000));
 // → 100
 // → 101
 // → 102
